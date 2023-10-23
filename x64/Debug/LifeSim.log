@@ -1,0 +1,6 @@
+﻿  LifeSim.cpp
+C:\Users\matth\OneDrive\Bureau\Projets\LifeSim\LifeSim.cpp(94,28): error C2039: 'printEntity': is not a member of 'Entity'
+C:\Users\matth\OneDrive\Bureau\Projets\LifeSim\Entity.h(9,7): message : see declaration of 'Entity'
+  PhysicsSystem.cpp
+  PositionComponent.cpp
+  Generating Code...
