@@ -12,7 +12,7 @@ public:
     bool living;         // Indicates whether the entity is alive. Default is true.
     std::string lifetime; // The lifetime of the entity in the format hh:mm:ss. Default is 00:00:00.
 
-    uint32_t getID() const override {
-        return 4;  // Unique ID for StatusComponent
+    std::uint32_t getID() const override {
+        return STATUS_COMPONENT;
     }
 };

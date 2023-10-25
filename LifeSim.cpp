@@ -7,6 +7,7 @@
 #include "PhysicsSystem.h"
 #include <windows.h>
 #include "PositionComponent.h"
+#include "Entity.cpp"
 
 
 #define MAX_LOADSTRING 100
@@ -66,7 +67,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         PositionComponent* positionComponent = ecsManager.createComponent(PositionComponent(x, y));
 
         // Add the component to the entity
-        entity.addComponent(positionComponent);
+        entity.addComponent(POSITION_COMPONENT, positionComponent);
 
         // Add the entity to ECSManager
         ecsManager.addEntity(entity);
@@ -91,7 +92,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             // Simulation code here
             for (Entity& entity : ecsManager.getAllEntities()) {
                 for (Entity& entity : ecsManager.getAllEntities()) {
-                    entity.printEntity(entity);
+                    printEntity(entity);
                     // ... remaining logic ...
                 }
 

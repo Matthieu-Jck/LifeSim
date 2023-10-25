@@ -16,6 +16,6 @@ public:
         attraction(attraction), sight(sight), rmv(rmv) {}
 
     std::uint32_t getID() const override {
-        return 1;  // unique ID for GeneComponent
+        return GENE_COMPONENT;
     }
 };

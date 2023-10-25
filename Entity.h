@@ -1,25 +1,36 @@
 #pragma once
-#include <string>
+
 #include <unordered_map>
-#include <typeinfo>
+#include <memory>
+#include <cstdint>
 #include <stdexcept>
 #include "Component.h"
-#include <Windows.h>
 
 class Entity {
 public:
-    template <typename T>
-    void addComponent(T component); // You can implement this in the .cpp file
+    std::unordered_map<std::uint32_t, std::shared_ptr<Component>> components;
+
+    template <typename T, std::enable_if_t<std::is_base_of<Component, T>::value>* = nullptr>
+    void addComponent(std::uint32_t componentID, T component);
 
     template <typename T>
-    T& getComponent(); // You can implement this in the .cpp file
+    T& getComponent(std::uint32_t componentID);
 
     template <typename T>
-    const T& getComponent() const; // You can implement this in the .cpp file
-
-private:
-    std::unordered_map<std::string, void*> components;
+    const T& getComponent(std::uint32_t componentID) const;
 };
 
-// Declaration for printEntity, implementation should be in the .cpp file.
-void printEntity(const Entity& entity);
+template <typename T, std::enable_if_t<std::is_base_of<Component, T>::value>*>
+void Entity::addComponent(std::uint32_t componentID, T component) {
+    components[componentID] = std::make_shared<T>(component);
+}
+
+template <typename T>
+T& Entity::getComponent(std::uint32_t componentID) {
+    return *std::static_pointer_cast<T>(components[componentID]);
+}
+
+template <typename T>
+const T& Entity::getComponent(std::uint32_t componentID) const {
+    return *std::static_pointer_cast<const T>(components.at(componentID));
+}

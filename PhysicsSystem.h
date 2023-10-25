@@ -1,3 +1,5 @@
+#pragma once
+
 #include "System.h"
 #include "Entity.h"
 #include "PhysicsComponent.h"

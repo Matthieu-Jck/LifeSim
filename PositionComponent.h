@@ -10,7 +10,7 @@ public:
     PositionComponent(float x, float y) : x(x), y(y) {}
 
     std::uint32_t getID() const override {
-        return 3;  // unique ID for PositionComponent
+        return POSITION_COMPONENT;
     }
 
     friend std::ostream& operator<<(std::ostream& os, const PositionComponent& pos);

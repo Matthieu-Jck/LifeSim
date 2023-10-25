@@ -12,7 +12,7 @@ public:
     float speed;          // Current speed of the entity, measured in distance units per second (du/s). Default is 0.
     float currentWeight;  // Current weight of the entity, measured in weight units (wu). Default is 1.
 
-    uint32_t getID() const override {
-        return 2;  // Unique ID for PhysicsComponent
+    std::uint32_t getID() const override {
+        return PHYSICS_COMPONENT;
     }
 };
