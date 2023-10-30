@@ -3,11 +3,11 @@
 #include <cstdint>
 
 // Enum for component types
-enum ComponentType {
-    const std::uint32_t GENE_COMPONENT = 1,
-    const std::uint32_t PHYSICS_COMPONENT = 2,
-    const std::uint32_t POSITION_COMPONENT = 3,
-    const std::uint32_t STATUS_COMPONENT = 4,
+enum ComponentType : std::uint32_t {
+    GENE_COMPONENT = 1,
+    PHYSICS_COMPONENT = 2,
+    POSITION_COMPONENT = 3,
+    STATUS_COMPONENT = 4,
     // Add additional components here
 };
 

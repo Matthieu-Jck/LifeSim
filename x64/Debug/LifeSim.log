@@ -1,30 +1,4 @@
 ﻿  Entity.cpp
-C:\Users\matth\OneDrive\Bureau\Projets\LifeSim\Component.h(7,5): error C2059: syntax error: 'const'
-C:\Users\matth\OneDrive\Bureau\Projets\LifeSim\Component.h(12,1): error C2143: syntax error: missing ';' before '}'
-C:\Users\matth\OneDrive\Bureau\Projets\LifeSim\Component.h(12,1): error C2059: syntax error: '}'
-C:\Users\matth\OneDrive\Bureau\Projets\LifeSim\PositionComponent.h(13,16): error C2065: 'POSITION_COMPONENT': undeclared identifier
-C:\Users\matth\OneDrive\Bureau\Projets\LifeSim\GeneComponent.h(19,16): error C2065: 'GENE_COMPONENT': undeclared identifier
-C:\Users\matth\OneDrive\Bureau\Projets\LifeSim\PhysicsComponent.h(16,16): error C2065: 'PHYSICS_COMPONENT': undeclared identifier
-C:\Users\matth\OneDrive\Bureau\Projets\LifeSim\StatusComponent.h(16,16): error C2065: 'STATUS_COMPONENT': undeclared identifier
-  LifeSim.cpp
-C:\Users\matth\OneDrive\Bureau\Projets\LifeSim\Component.h(7,5): error C2059: syntax error: 'const'
-C:\Users\matth\OneDrive\Bureau\Projets\LifeSim\Component.h(12,1): error C2143: syntax error: missing ';' before '}'
-C:\Users\matth\OneDrive\Bureau\Projets\LifeSim\Component.h(12,1): error C2059: syntax error: '}'
-C:\Users\matth\OneDrive\Bureau\Projets\LifeSim\PhysicsComponent.h(16,16): error C2065: 'PHYSICS_COMPONENT': undeclared identifier
-C:\Users\matth\OneDrive\Bureau\Projets\LifeSim\GeneComponent.h(19,16): error C2065: 'GENE_COMPONENT': undeclared identifier
-C:\Users\matth\OneDrive\Bureau\Projets\LifeSim\PositionComponent.h(13,16): error C2065: 'POSITION_COMPONENT': undeclared identifier
-C:\Users\matth\OneDrive\Bureau\Projets\LifeSim\StatusComponent.h(16,16): error C2065: 'STATUS_COMPONENT': undeclared identifier
-C:\Users\matth\OneDrive\Bureau\Projets\LifeSim\LifeSim.cpp(70,29): error C2065: 'POSITION_COMPONENT': undeclared identifier
-  PhysicsSystem.cpp
-C:\Users\matth\OneDrive\Bureau\Projets\LifeSim\Component.h(7,5): error C2059: syntax error: 'const'
-C:\Users\matth\OneDrive\Bureau\Projets\LifeSim\Component.h(12,1): error C2143: syntax error: missing ';' before '}'
-C:\Users\matth\OneDrive\Bureau\Projets\LifeSim\Component.h(12,1): error C2059: syntax error: '}'
-C:\Users\matth\OneDrive\Bureau\Projets\LifeSim\PhysicsComponent.h(16,16): error C2065: 'PHYSICS_COMPONENT': undeclared identifier
-C:\Users\matth\OneDrive\Bureau\Projets\LifeSim\GeneComponent.h(19,16): error C2065: 'GENE_COMPONENT': undeclared identifier
-C:\Users\matth\OneDrive\Bureau\Projets\LifeSim\PhysicsSystem.cpp(32,71): error C2065: 'PHYSICS_COMPONENT': undeclared identifier
-C:\Users\matth\OneDrive\Bureau\Projets\LifeSim\PhysicsSystem.cpp(32,31): error C2530: 'physics': references must be initialized
-C:\Users\matth\OneDrive\Bureau\Projets\LifeSim\PhysicsSystem.cpp(43,71): error C2065: 'PHYSICS_COMPONENT': undeclared identifier
-C:\Users\matth\OneDrive\Bureau\Projets\LifeSim\PhysicsSystem.cpp(43,31): error C2530: 'physics': references must be initialized
-C:\Users\matth\OneDrive\Bureau\Projets\LifeSim\PhysicsSystem.cpp(44,62): error C2065: 'GENE_COMPONENT': undeclared identifier
-C:\Users\matth\OneDrive\Bureau\Projets\LifeSim\PhysicsSystem.cpp(44,25): error C2530: 'gene': references must be initialized
-  Generating Code...
+LifeSim.obj : error LNK2005: "void __cdecl printEntity(class Entity const &)" (?printEntity@@YAXAEBVEntity@@@Z) already defined in Entity.obj
+LifeSim.obj : error LNK2019: unresolved external symbol "public: __cdecl Entity::Entity(class Entity &&)" (??0Entity@@QEAA@$$QEAV0@@Z) referenced in function "public: static void __cdecl std::_Default_allocator_traits<class std::allocator<class Entity> >::construct<class Entity,class Entity>(class std::allocator<class Entity> &,class Entity * const,class Entity &&)" (??$construct@VEntity@@V1@@?$_Default_allocator_traits@V?$allocator@VEntity@@@std@@@std@@SAXAEAV?$allocator@VEntity@@@1@QEAVEntity@@$$QEAV3@@Z)
+C:\Users\matth\OneDrive\Bureau\Projets\LifeSim\x64\Debug\LifeSim.exe : fatal error LNK1120: 1 unresolved externals

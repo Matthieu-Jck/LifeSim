@@ -29,7 +29,7 @@ private:
 };
 
 void PhysicsSystem::applyFriction(Entity& entity) {
-    PhysicsComponent& physics = entity.getComponent<PhysicsComponent>(PHYSICS_COMPONENT);
+    PhysicsComponent& physics = *entity.getComponent<PhysicsComponent>(PHYSICS_COMPONENT);
     float frictionCoefficient = 0.1f;
 
     physics.speed -= physics.speed * frictionCoefficient;
@@ -40,8 +40,8 @@ void PhysicsSystem::applyGravity(Entity& entity, float globalGravityValue) {
 }
 
 void PhysicsSystem::updateCurrentWeight(Entity& entity) {
-    PhysicsComponent& physics = entity.getComponent<PhysicsComponent>(PHYSICS_COMPONENT);
-    GeneComponent& gene = entity.getComponent<GeneComponent>(GENE_COMPONENT);
+    PhysicsComponent& physics = *entity.getComponent<PhysicsComponent>(PHYSICS_COMPONENT);
+    GeneComponent& gene = *entity.getComponent<GeneComponent>(GENE_COMPONENT);
     // Your logic here
 }
 
@@ -54,3 +54,4 @@ void PhysicsSystem::update(Entity& entity) {
     applyGravity(entity, globalGravityValue);
     updateCurrentWeight(entity);
 }
+

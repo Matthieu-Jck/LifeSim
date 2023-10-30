@@ -64,13 +64,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         // Randomly generating x and y for demonstration, you can set these to whatever you like
         float x = static_cast<float>(rand() % 100);
         float y = static_cast<float>(rand() % 100);
+
         PositionComponent* positionComponent = ecsManager.createComponent(PositionComponent(x, y));
+        entity.addComponent(POSITION_COMPONENT, std::unique_ptr<PositionComponent>(positionComponent));
+        
+        ecsManager.addEntity(std::move(entity));
 
-        // Add the component to the entity
-        entity.addComponent(POSITION_COMPONENT, positionComponent);
-
-        // Add the entity to ECSManager
-        ecsManager.addEntity(entity);
     }
 
     //=============================================== MAIN MESSAGE LOOP ===============================================//

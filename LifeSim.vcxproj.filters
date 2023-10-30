@@ -132,7 +132,7 @@
       <Filter>Source Files\Entity</Filter>
     </ClCompile>
     <ClCompile Include="PositionComponent.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

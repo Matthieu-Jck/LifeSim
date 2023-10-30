@@ -7,16 +7,10 @@ class PositionComponent : public Component {
 public:
     float x, y;
 
-    PositionComponent(float x, float y) : x(x), y(y) {}
+    PositionComponent(float x, float y);
 
-    std::uint32_t getID() const override {
-        return POSITION_COMPONENT;
-    }
+    std::uint32_t getID() const override;
 
+    // Declaration of the friend function for output
     friend std::ostream& operator<<(std::ostream& os, const PositionComponent& pos);
 };
-
-std::ostream& operator<<(std::ostream& os, const PositionComponent& pos) {
-    os << "PositionComponent: x=" << pos.x << ", y=" << pos.y;
-    return os;
-}

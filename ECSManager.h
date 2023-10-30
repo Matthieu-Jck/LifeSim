@@ -1,4 +1,5 @@
 #pragma once
+
 #include <vector>
 #include <unordered_map>
 #include <typeinfo>
@@ -10,8 +11,8 @@
 
 class ECSManager {
 public:
-    void addEntity(Entity entity) {
-        entities.push_back(entity);
+    void addEntity(Entity&& entity) {
+        entities.push_back(std::move(entity));
     }
 
     void addSystem(System* system) {
@@ -24,7 +25,7 @@ public:
         }
     }
 
-    std::vector<Entity> getAllEntities() {
+    std::vector<Entity>& getAllEntities() {
         return entities;
     }
 
