@@ -1,4 +1,2 @@
-﻿  Entity.cpp
-LifeSim.obj : error LNK2005: "void __cdecl printEntity(class Entity const &)" (?printEntity@@YAXAEBVEntity@@@Z) already defined in Entity.obj
-LifeSim.obj : error LNK2019: unresolved external symbol "public: __cdecl Entity::Entity(class Entity &&)" (??0Entity@@QEAA@$$QEAV0@@Z) referenced in function "public: static void __cdecl std::_Default_allocator_traits<class std::allocator<class Entity> >::construct<class Entity,class Entity>(class std::allocator<class Entity> &,class Entity * const,class Entity &&)" (??$construct@VEntity@@V1@@?$_Default_allocator_traits@V?$allocator@VEntity@@@std@@@std@@SAXAEAV?$allocator@VEntity@@@1@QEAVEntity@@$$QEAV3@@Z)
-C:\Users\matth\OneDrive\Bureau\Projets\LifeSim\x64\Debug\LifeSim.exe : fatal error LNK1120: 1 unresolved externals
+﻿  LifeForm.cpp
+  LifeSim.vcxproj -> C:\Users\matth\OneDrive\Bureau\Projets\LifeSim\x64\Debug\LifeSim.exe
