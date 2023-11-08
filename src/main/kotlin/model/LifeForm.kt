@@ -38,11 +38,14 @@ class LifeForm(
                 val dx = otherLifeForm.posX - this.posX
                 val dy = otherLifeForm.posY - this.posY
                 val distance = sqrt(dx * dx + dy * dy)
-                // Prevent division by zero or extremely strong attractions when too close
-                if (distance > 0.001f) {  // Using float comparison
-                    val attractionStrength = this.attraction.toFloat() / distance  // Casting to float
-                    directionX += attractionStrength * dx
-                    directionY += attractionStrength * dy
+
+                if (distance <= this.sight) {
+                    // Prevent division by zero or extremely strong attractions when too close
+                    if (distance > 0.001f) {  // Using float comparison
+                        val attractionStrength = this.attraction.toFloat() / distance  // Casting to float
+                        directionX += attractionStrength * dx
+                        directionY += attractionStrength * dy
+                    }
                 }
             }
         }

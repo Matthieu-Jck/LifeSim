@@ -8,7 +8,7 @@ object LifeFormFactory {
     const val DEFAULT_EFFICIENCY = 1.0f
     const val DEFAULT_ACCELERATION = 0.1f
     const val DEFAULT_ATTRACTION = 1.0f
-    const val DEFAULT_SIGHT = 0.0f
+    const val DEFAULT_SIGHT = 100.0f
     const val DEFAULT_REPRODUCTION_MUTATION_VALUE = 0.01f
 
     fun createLifeForm(
