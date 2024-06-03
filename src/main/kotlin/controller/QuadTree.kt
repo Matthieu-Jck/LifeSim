@@ -18,15 +18,15 @@ data class Boundary(val x: Float, val y: Float, val width: Float, val height: Fl
     }
 }
 
-class QuadTree(val boundary: Boundary, val capacity: Int) {
-    var lifeForms: MutableList<LifeForm> = mutableListOf()
-    var divided: Boolean = false
-    var northwest: QuadTree? = null
-    var northeast: QuadTree? = null
-    var southwest: QuadTree? = null
-    var southeast: QuadTree? = null
+class QuadTree(private val boundary: Boundary, private val capacity: Int) {
+    private var lifeForms: MutableList<LifeForm> = mutableListOf()
+    private var divided: Boolean = false
+    private var northwest: QuadTree? = null
+    private var northeast: QuadTree? = null
+    private var southwest: QuadTree? = null
+    private var southeast: QuadTree? = null
 
-    fun subdivide() {
+    private fun subdivide() {
         val x = boundary.x
         val y = boundary.y
         val w = boundary.width / 2

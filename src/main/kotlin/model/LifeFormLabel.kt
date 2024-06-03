@@ -1,21 +1,32 @@
 package model
 
-import java.awt.Color
-import java.awt.Dimension
-import java.awt.Graphics
+import java.awt.*
 import javax.swing.JLabel
 
-internal class LifeFormLabel(private val color: Color, private val diameter: Int) : JLabel() {
+internal class LifeFormLabel(private val color: Color, private var diameter: Float) : JLabel() {
 
     init {
         isOpaque = false
-        // Correctly setting the size using Dimension
-        size = Dimension(diameter, diameter)
+        updateSize(diameter)
+    }
+
+    private fun updateSize(diameter: Float) {
+        this.diameter = diameter
+        size = Dimension(diameter.toInt(), diameter.toInt())
+        preferredSize = size
     }
 
     override fun paintComponent(g: Graphics) {
         super.paintComponent(g)
-        g.color = color
-        g.fillOval(0, 0, diameter, diameter) // Fill a circle
+        val g2d = g as Graphics2D
+        g2d.color = color
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
+        g2d.fillOval(0, 0, width, height)
+    }
+
+    fun updateDiameter(newDiameter: Float) {
+        updateSize(newDiameter)
+        revalidate()
+        repaint()
     }
 }
