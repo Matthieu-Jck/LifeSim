@@ -7,6 +7,7 @@ import java.awt.Graphics
 import javax.swing.JFrame
 import javax.swing.JLabel
 import javax.swing.JPanel
+import java.awt.Rectangle
 
 class GUI {
     val frame: JFrame = JFrame("Life Sim")
@@ -15,10 +16,8 @@ class GUI {
     val borderWidth: Int = 5
 
     init {
-        frame.pack()
-        frame.setSize(frame.width + borderWidth * 2, frame.height + borderWidth * 2)
-        frame.layout = null // This will allow absolute positioning
         frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
+        frame.layout = null // This will allow absolute positioning
 
         val borderPanel = object : JPanel() {
             override fun paintComponent(g: Graphics) {
@@ -32,12 +31,22 @@ class GUI {
             }
         }
 
-        // Set the bounds of borderPanel to cover the entire frame
-        borderPanel.setBounds(insets.left, insets.top, contentWidth, contentHeight)
+        // Set the size of the frame to account for the desired content size plus borders
+        frame.setSize(1000 + borderWidth * 2, 1000 + borderWidth * 2)
+
+        // Set the borderPanel to opaque and add to frame
+        borderPanel.isOpaque = false
         frame.add(borderPanel)
         frame.isVisible = true
-        borderPanel.isOpaque = false
 
+        // Update the borderPanel bounds after the frame is visible to ensure correct insets
+        borderPanel.bounds = frame.insets.run {
+            val contentWidth = frame.width - (left + right)
+            val contentHeight = frame.height - (top + bottom)
+            Rectangle(left, top, contentWidth, contentHeight)
+        }
+
+        frame.contentPane.background = Color.BLACK
     }
 
     fun updateGUI() {
@@ -46,8 +55,8 @@ class GUI {
                 val diameter = label.height // Assuming width and height are the same since it's a circle
                 // Update life form label position during the simulation
                 label.setBounds(
-                    (lifeForm.position.x - diameter / 2).toInt(),
-                    (lifeForm.position.y - diameter / 2).toInt(),
+                    (lifeForm.posX - diameter / 2).toInt(),
+                    (lifeForm.posY - diameter / 2).toInt(),
                     diameter,
                     diameter
                 )
@@ -59,15 +68,23 @@ class GUI {
         frame.repaint()
     }
 
+    // If radius is a constant value, declare it in your GUI class
+    companion object {
+        const val LIFE_FORM_RADIUS: Int = 10
+    }
+
     fun addLifeFormLabel(lifeForm: LifeForm, diameter: Int) {
         val color = lifeForm.species.color
         val label = LifeFormLabel(color, diameter)
         lifeFormLabels[lifeForm] = label
 
-        // Position the label in the center of the life form's position
-        // When adding a LifeFormLabel
-        val posX = lifeForm.position.x.coerceIn(radius.toDouble(), contentWidth - radius.toDouble()).toInt() - diameter / 2
-        val posY = lifeForm.position.y.coerceIn(radius.toDouble(), contentHeight - radius.toDouble()).toInt() - diameter / 2
+        val contentWidth = frame.contentPane.width
+        val contentHeight = frame.contentPane.height
+        val insets = frame.insets
+
+        // Adjust the position to account for the borders
+        val posX = ((lifeForm.posX + insets.left).coerceIn(borderWidth.toFloat(), (contentWidth - LIFE_FORM_RADIUS * 2).toFloat()) - LIFE_FORM_RADIUS).toInt()
+        val posY = ((lifeForm.posY + insets.top).coerceIn(borderWidth.toFloat(), (contentHeight - LIFE_FORM_RADIUS * 2).toFloat()) - LIFE_FORM_RADIUS).toInt()
 
         label.setBounds(posX, posY, diameter, diameter)
 

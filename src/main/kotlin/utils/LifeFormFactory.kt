@@ -2,29 +2,30 @@ package utils
 
 import model.LifeForm
 import model.SpeciesEnum
-import java.awt.geom.Point2D
 
 object LifeFormFactory {
-    const val DEFAULT_BASE_WEIGHT = 1.0
-    const val DEFAULT_EFFICIENCY = 1.0
-    const val DEFAULT_ACCELERATION = 0.1
-    const val DEFAULT_ATTRACTION = 1.0
-    const val DEFAULT_SIGHT = 1000.0
-    const val DEFAULT_REPRODUCTION_MUTATION_VALUE = 0.01
+    const val DEFAULT_BASE_WEIGHT = 1.0f
+    const val DEFAULT_EFFICIENCY = 1.0f
+    const val DEFAULT_ACCELERATION = 0.1f
+    const val DEFAULT_ATTRACTION = 1.0f
+    const val DEFAULT_SIGHT = 100.0f
+    const val DEFAULT_REPRODUCTION_MUTATION_VALUE = 0.01f
 
     fun createLifeForm(
         species: SpeciesEnum,
-        position: Point2D.Double,
-        baseWeight: Double = DEFAULT_BASE_WEIGHT,
-        efficiency: Double = DEFAULT_EFFICIENCY,
-        acceleration: Double = DEFAULT_ACCELERATION,
-        attraction: Double = DEFAULT_ATTRACTION,
-        sight: Double = DEFAULT_SIGHT,
-        reproductionMutationValue: Double = DEFAULT_REPRODUCTION_MUTATION_VALUE
+        posX: Float,  // Using float for position x
+        posY: Float,  // Using float for position y
+        baseWeight: Float = DEFAULT_BASE_WEIGHT,
+        efficiency: Float = DEFAULT_EFFICIENCY,
+        acceleration: Float = DEFAULT_ACCELERATION,
+        attraction: Float = DEFAULT_ATTRACTION,
+        sight: Float = DEFAULT_SIGHT,
+        reproductionMutationValue: Float = DEFAULT_REPRODUCTION_MUTATION_VALUE
     ): LifeForm {
         return LifeForm(
             species = species,
-            position = position,
+            posX = posX,
+            posY = posY,
             baseWeight = baseWeight,
             efficiency = efficiency,
             acceleration = acceleration,

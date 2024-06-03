@@ -1,14 +1,12 @@
 import controller.SimulationController
-import model.LifeForm
 import model.SpeciesEnum
 import utils.LifeFormFactory
-import java.awt.geom.Point2D
 import kotlin.random.Random
 
 fun main() {
     val simulationController = SimulationController()
 
-    initializeLifeForms(simulationController,500)
+    initializeLifeForms(simulationController,5000)
 
     // Simulation loop
     while (true) {
@@ -19,10 +17,9 @@ fun main() {
         simulationController.updateDeath()
         simulationController.updateMutationEvents()
 
-
         simulationController.gui.updateGUI()
 
-        Thread.sleep(50) // Delay for 1 second before the next update
+        Thread.sleep(50)
     }
 }
 
@@ -31,28 +28,31 @@ fun initializeLifeForms(simulationController: SimulationController, numberOfLife
     val speciesValues = SpeciesEnum.entries.toTypedArray()
     val random = Random(System.currentTimeMillis())
 
-    // Create a specified number of life forms with random species and positions
+    // Create a specified number of life forms with random species and positions within a 1000x1000 area
     repeat(numberOfLifeForms) {
         val species = speciesValues[random.nextInt(speciesValues.size)]
-        val position = Point2D.Double(random.nextDouble() * 1000, random.nextDouble() * 1500) // Assuming a 1000x1000 area
-        createAndAddLifeForm(simulationController, species, position)
+        val posX = random.nextFloat() * 1000f
+        val posY = random.nextFloat() * 1000f
+        createAndAddLifeForm(simulationController, species, posX, posY)
     }
 }
 
 fun createAndAddLifeForm(
     controller: SimulationController,
     species: SpeciesEnum,
-    position: Point2D.Double,
-    baseWeight: Double? = null,
-    efficiency: Double? = null,
-    acceleration: Double? = null,
-    attraction: Double? = null,
-    sight: Double? = null,
-    reproductionMutationValue: Double? = null
+    posX: Float, // X position as Float
+    posY: Float, // Y position as Float
+    baseWeight: Float? = null,
+    efficiency: Float? = null,
+    acceleration: Float? = null,
+    attraction: Float? = null,
+    sight: Float? = null,
+    reproductionMutationValue: Float? = null
 ) {
     val lifeForm = LifeFormFactory.createLifeForm(
         species = species,
-        position = position,
+        posX = posX, // Pass Float directly
+        posY = posY, // Pass Float directly
         baseWeight = baseWeight ?: LifeFormFactory.DEFAULT_BASE_WEIGHT,
         efficiency = efficiency ?: LifeFormFactory.DEFAULT_EFFICIENCY,
         acceleration = acceleration ?: LifeFormFactory.DEFAULT_ACCELERATION,
@@ -62,6 +62,8 @@ fun createAndAddLifeForm(
     )
     controller.addLifeForm(lifeForm)
 }
+
+
 
 
 

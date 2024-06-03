@@ -1,55 +1,69 @@
 package model
 
-import java.awt.geom.Point2D
 import java.util.*
 import kotlin.math.atan2
+import kotlin.math.sqrt
 
 class LifeForm(
     val species: SpeciesEnum,
-    var position: Point2D.Double,
-    private var baseWeight: Double,
-    var efficiency: Double,
-    var acceleration: Double,
-    var attraction: Double,
-    var sight: Double,
-    var reproductionMutationValue: Double
+    var posX: Float,  // Replacing position with individual float coordinates
+    var posY: Float,
+    private var baseWeight: Float,
+    var efficiency: Float,
+    var acceleration: Float,
+    var attraction: Float,
+    var sight: Float,
+    var reproductionMutationValue: Float,
 ) {
     val id: String = UUID.randomUUID().toString()
-    private var energy: Double = 100.0
-    var speed: Double = 0.0
-    var direction: Double = 0.0
-    var velocityX: Double = 0.0
-    var velocityY: Double = 0.0
-    var maxSpeed: Double = 10.0
-    var friction: Double = 0.0
-    var bounceEfficiency: Double = 1.0
+    private var energy: Float = 100.0f
+    var speed: Float = 0.0f  // Using float for speed
+    var direction: Float = 0.0f  // Using float for direction
+    var velocityX: Float = 0.0f  // Using float for velocity components
+    var velocityY: Float = 0.0f
+    var maxSpeed: Float = 10.0f  // Using float for maxSpeed
+    var friction: Float = 0.0f  // Using float for friction
+    var bounceEfficiency: Float = 1.0f  // Using float for bounceEfficiency
     var lifetime: Timer = Timer()
-    var currentWeight: Double = baseWeight+energy
+    var currentWeight: Float = baseWeight + energy
     var aliveStatus: Boolean = true
 
     fun updateDirection(lifeForms: List<LifeForm>) {
-        var directionX = 0.0
-        var directionY = 0.0
-        println(this)
+        var directionX = 0.0f  // Using float
+        var directionY = 0.0f  // Using float
         // Accumulate the attraction from all other life forms within sight
         for (otherLifeForm in lifeForms) {
             if (otherLifeForm != this) {
-                val distance = this.position.distance(otherLifeForm.position)
-                // Prevent division by zero or extremely strong attractions when too close
-                if (distance > 0.001) {
-                    val attractionStrength = this.attraction / distance
-                    directionX += attractionStrength * (otherLifeForm.position.x - this.position.x)
-                    directionY += attractionStrength * (otherLifeForm.position.y - this.position.y)
+                // Calculate distance using Float arithmetic
+                val dx = otherLifeForm.posX - this.posX
+                val dy = otherLifeForm.posY - this.posY
+                val distance = sqrt(dx * dx + dy * dy)
+
+                if (distance <= this.sight) {
+                    // Prevent division by zero or extremely strong attractions when too close
+                    if (distance > 0.001f) {  // Using float comparison
+                        val attractionStrength = this.attraction.toFloat() / distance  // Casting to float
+                        directionX += attractionStrength * dx
+                        directionY += attractionStrength * dy
+                    }
                 }
             }
         }
 
         // Set the new direction based on the calculated attraction forces
-        this.direction = if (directionX != 0.0 || directionY != 0.0) atan2(directionY, directionX) else this.direction
+        this.direction = if (directionX != 0.0f || directionY != 0.0f) atan2(
+            directionY.toDouble(),
+            directionX.toDouble()
+        ).toFloat() else this.direction
     }
 
     override fun toString(): String {
-        val directionDegrees = Math.toDegrees(direction) % 360
-        return "UUID: $id, Species: ${species.name}, Position: (${position.x}, ${position.y}), Energy: $energy, Direction: ${"%.2f".format(directionDegrees)} degrees, Velocity[X,Y]:[$velocityX,$velocityY] ."
+        val directionDegrees =
+            Math.toDegrees(direction.toDouble()).toFloat() % 360 // Converting to degrees with float precision
+        return "UUID: $id, Species: ${species.name}, Position: ($posX, $posY), Energy: $energy, Direction: ${
+            "%.2f".format(
+                directionDegrees
+            )
+        } degrees, Velocity[X,Y]:[$velocityX,$velocityY]."
     }
 }
