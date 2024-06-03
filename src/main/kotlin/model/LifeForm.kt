@@ -13,7 +13,7 @@ class LifeForm(
     var acceleration: Float,
     var attraction: Float,
     var sight: Float,
-    var reproductionMutationValue: Float
+    var reproductionMutationValue: Float,
 ) {
     val id: String = UUID.randomUUID().toString()
     private var energy: Float = 100.0f

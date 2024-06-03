@@ -6,7 +6,7 @@ import kotlin.random.Random
 fun main() {
     val simulationController = SimulationController()
 
-    initializeLifeForms(simulationController,2000)
+    initializeLifeForms(simulationController,5000)
 
     // Simulation loop
     while (true) {
@@ -20,7 +20,7 @@ fun main() {
 
         simulationController.gui.updateGUI()
 
-        Thread.sleep(50) // Delay for 1 second before the next update
+        Thread.sleep(50)
     }
 }
 
@@ -32,7 +32,7 @@ fun initializeLifeForms(simulationController: SimulationController, numberOfLife
     // Create a specified number of life forms with random species and positions within a 1000x1000 area
     repeat(numberOfLifeForms) {
         val species = speciesValues[random.nextInt(speciesValues.size)]
-        val posX = random.nextFloat() * 1000f // Generate a random float position
+        val posX = random.nextFloat() * 1000f
         val posY = random.nextFloat() * 1000f
         createAndAddLifeForm(simulationController, species, posX, posY)
     }

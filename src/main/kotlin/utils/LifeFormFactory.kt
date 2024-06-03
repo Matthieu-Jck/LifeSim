@@ -2,7 +2,7 @@ package utils
 
 import model.LifeForm
 import model.SpeciesEnum
-import java.awt.geom.Point2D
+
 object LifeFormFactory {
     const val DEFAULT_BASE_WEIGHT = 1.0f
     const val DEFAULT_EFFICIENCY = 1.0f

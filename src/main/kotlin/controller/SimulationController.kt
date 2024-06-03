@@ -5,17 +5,26 @@ import view.GUI
 import kotlin.math.*
 
 const val DIAMETER = 10
+const val QUADTREE_CAPACITY = 4
 
 class SimulationController {
     private val lifeForms: MutableList<LifeForm> = mutableListOf()
     val gui: GUI = GUI()
+    private var quadtree: QuadTree
+
+    init {
+        val boundary = Boundary(gui.frame.width / 2f, gui.frame.height / 2f, gui.frame.width / 2f, gui.frame.height / 2f)
+        quadtree = QuadTree(boundary, QUADTREE_CAPACITY)
+    }
 
     fun addLifeForm(lifeForm: LifeForm) {
         lifeForms.add(lifeForm)
+        quadtree.insert(lifeForm)
         gui.addLifeFormLabel(lifeForm, DIAMETER)
     }
 
     fun updatePositions() {
+        quadtree = QuadTree(Boundary(gui.frame.width / 2f, gui.frame.height / 2f, gui.frame.width / 2f, gui.frame.height / 2f), QUADTREE_CAPACITY)
         for (lifeForm in lifeForms) {
             // Calculate the change in speed based on acceleration
             val speedChange = lifeForm.acceleration
@@ -54,6 +63,9 @@ class SimulationController {
 
             checkAndHandleCollisions(lifeForm)
 
+            // Re-insert updated life form into quadtree
+            quadtree.insert(lifeForm)
+
             // Limit the speed to a maximum value
             val speedLimit = lifeForm.maxSpeed
             val currentSpeed = hypot(lifeForm.velocityX.toDouble(), lifeForm.velocityY.toDouble()).toFloat()
@@ -64,12 +76,16 @@ class SimulationController {
             }
         }
     }
+
     fun updateLifeFormsDirection() {
-        lifeForms.forEach { it.updateDirection(lifeForms) }
+        lifeForms.forEach { lifeForm ->
+            val range = Boundary(lifeForm.posX, lifeForm.posY, lifeForm.sight, lifeForm.sight)
+            val nearbyLifeForms = quadtree.query(range, mutableListOf())
+            lifeForm.updateDirection(nearbyLifeForms)
+        }
     }
 
     private fun checkAndHandleCollisions(lifeForm: LifeForm) {
-
         val borderWidth = gui.borderWidth
         val insets = gui.frame.insets
         val contentWidth = gui.frame.width - (insets.left + insets.right + borderWidth * 2)
@@ -102,6 +118,7 @@ class SimulationController {
             lifeForm.posY = (radius + insets.top + borderWidth).toFloat()
         }
     }
+
     fun updateFriction() {
         val frictionCoefficient = 0.1f // Make sure to use Float
         for (lifeForm in lifeForms) {
