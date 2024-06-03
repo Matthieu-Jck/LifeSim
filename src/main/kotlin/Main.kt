@@ -17,7 +17,6 @@ fun main() {
         simulationController.updateDeath()
         simulationController.updateMutationEvents()
 
-
         simulationController.gui.updateGUI()
 
         Thread.sleep(50)
