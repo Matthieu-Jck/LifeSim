@@ -13,7 +13,8 @@ class SimulationController {
     private var quadtree: QuadTree
 
     init {
-        val boundary = Boundary(gui.frame.width / 2f, gui.frame.height / 2f, gui.frame.width / 2f, gui.frame.height / 2f)
+        val boundary =
+            Boundary(gui.frame.width / 2f, gui.frame.height / 2f, gui.frame.width / 2f, gui.frame.height / 2f)
         quadtree = QuadTree(boundary, QUADTREE_CAPACITY)
     }
 
@@ -24,7 +25,10 @@ class SimulationController {
     }
 
     fun updatePositions() {
-        quadtree = QuadTree(Boundary(gui.frame.width / 2f, gui.frame.height / 2f, gui.frame.width / 2f, gui.frame.height / 2f), QUADTREE_CAPACITY)
+        quadtree = QuadTree(
+            Boundary(gui.frame.width / 2f, gui.frame.height / 2f, gui.frame.width / 2f, gui.frame.height / 2f),
+            QUADTREE_CAPACITY
+        )
         for (lifeForm in lifeForms) {
             // Calculate the change in speed based on acceleration
             val speedChange = lifeForm.acceleration

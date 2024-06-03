@@ -1,13 +1,13 @@
 package view
 
-import model.LifeFormLabel
 import model.LifeForm
+import model.LifeFormLabel
 import java.awt.Color
 import java.awt.Graphics
+import java.awt.Rectangle
 import javax.swing.JFrame
 import javax.swing.JLabel
 import javax.swing.JPanel
-import java.awt.Rectangle
 
 class GUI {
     val frame: JFrame = JFrame("Life Sim")
@@ -83,8 +83,14 @@ class GUI {
         val insets = frame.insets
 
         // Adjust the position to account for the borders
-        val posX = ((lifeForm.posX + insets.left).coerceIn(borderWidth.toFloat(), (contentWidth - LIFE_FORM_RADIUS * 2).toFloat()) - LIFE_FORM_RADIUS).toInt()
-        val posY = ((lifeForm.posY + insets.top).coerceIn(borderWidth.toFloat(), (contentHeight - LIFE_FORM_RADIUS * 2).toFloat()) - LIFE_FORM_RADIUS).toInt()
+        val posX = ((lifeForm.posX + insets.left).coerceIn(
+            borderWidth.toFloat(),
+            (contentWidth - LIFE_FORM_RADIUS * 2).toFloat()
+        ) - LIFE_FORM_RADIUS).toInt()
+        val posY = ((lifeForm.posY + insets.top).coerceIn(
+            borderWidth.toFloat(),
+            (contentHeight - LIFE_FORM_RADIUS * 2).toFloat()
+        ) - LIFE_FORM_RADIUS).toInt()
 
         label.setBounds(posX, posY, diameter, diameter)
 

@@ -1,8 +1,6 @@
 package controller
 
 import model.LifeForm
-import kotlin.math.max
-import kotlin.math.min
 
 data class Boundary(val x: Float, val y: Float, val width: Float, val height: Float) {
     fun contains(lifeForm: LifeForm): Boolean {
