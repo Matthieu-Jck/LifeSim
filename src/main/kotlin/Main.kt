@@ -6,7 +6,7 @@ import kotlin.random.Random
 fun main() {
     val simulationController = SimulationController()
 
-    initializeLifeForms(simulationController, 500);
+    initializeLifeForms(simulationController, 200)
 
     // Simulation loop
     while (true) {
@@ -16,7 +16,7 @@ fun main() {
 
         simulationController.gui.updateGUI()
 
-        Thread.sleep(5)
+        Thread.sleep(1)
     }
 }
 
